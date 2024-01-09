@@ -1,0 +1,174 @@
+---
+title: "Pengaruh Jumlah Penduduk Miskin Terhadap Angka Kelahiran Indonesia Tahun 2020"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Sarah Aulia"
+date: 2024-01-09
+number-sections: true
+format:
+  html: default
+  docx: default
+editor: visual
+---
+
+![](poltekapp.jpg)
+
+## Pendahuluan
+
+### Latar belakang
+
+Kemiskinan merupakan fenomena yang kerap dialami oleh negara berkembang. Kemiskinan merupakan keadaan di mana seseorang tidak mampu untuk memenuhi kebutuhan dasar hidupnya. Keadaan ini menyebabkan terjadinya penurunan dalam produktivitas manusia dan juga pendapatan yang diperoleh.
+
+Keadaan tersebut dapat menghambat beberapa aspek seperti penundaan kelahiran anak. Karena ekonomi yang sulit membuat masyarakat berfikir untuk menunda memiliki anak.
+
+Penelitian ini akan membahas pengaruh jumlah penduduk miskin terhadap angka kelahiran di Indonesia pada tahun 2020.
+
+### Ruang lingkup
+
+Ruang lingkup pembahasan masalah pada penelitian ini mengandung variable mengenai Jumlah Penduduk Miskin Terhadap Angka Kelahiran Indonesia pada tahun 2020. Peran dari batasan masalah ini, yaitu membantu mengindentifikasi masalah yang akan diuraikan dan membatasi jangkauan proses yang diuraikan.
+
+### Rumusan masalah
+
+Berdasarkan uraian latar belakang di atas, maka yang menjadi rumusan masalah pada penelitian ini adalah:
+
+1.  Apakah Jumlah Kemiskinan Penduduk berpengaruh terhadap Angka Kelahiran Indonesia?
+
+### Tujuan dan manfaat penelitian
+
+Tujuan dari penelitian ini untuk mengetahui pengaruh dari Jumlah Penduduk Miskin di Indonesia dan tahun terkait terhadap Angka Kelahiran di Indonesia dan tahun terkait.
+
+Manfaat yang diberikan ke masyarakat terhadap penelitian ini, yaitu masyarakat dapat mengetahui pengaruh Jumlah Penduduk Miskin di Indonesia dan tahun terkait terhadap Angka Kelahiran di Indonesia dan tahun terkait.
+
+### Package
+
+Ini tidak wajib ada di packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library("tidyverse")
+library("readxl")
+library("dplyr")
+```
+
+## Studi pustaka
+
+1.  Kemiskinan
+
+    Kemiskinan merupakan keadaan seseorang yang mengalami kesulitan dalam memenuhi kebutuhan dasarnya. Kemiskinan terjadi karena adanya keterbelakangan atau kurangnya perhatian dari lingkungannya. Ketertinggalan ekonomi tersebut dapat menyebabkan menurunnya produktivitas manusia dan rendahnya pendapatan.
+
+2.  Angka Kelahiran
+
+    Angka kelahiran atau bisa disebut juga dengan fertilitas merupakan kemampuan seorang wanita dalam menghasilkan kelahiran hidup yang menjadi faktor pertumbuhan penduduk.
+
+## Metode penelitian
+
+### Data
+
+Berikut merupakan data yang digunakan sebagai objek penelitian. Data ini meliputi Angka Kelahiran di Indonesia tahun 2020 dan Data Jumlah Penduduk Miskin di Indonesia tahun 2020.
+
+![](AK.PNG){width="341"}
+
+![](JPMM.PNG){width="340"}
+
+Penelitian ini menggunakan Angka Kelahiran di Indonesia tahun 2020 dan Data Jumlah Penduduk Miskin di Indonesia tahun 2020 dari Badan Pusat Statistik (BPS).
+
+Baca data
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('dat.xlsx')
+head(dat)
+```
+
+```         
+```
+
+```{r}
+library("ggplot2")
+library("readxl")
+library("dplyr")
+ggplot(data=dat,aes(x=AK,y=JPM))+
+  geom_point(color="blue",size=2)+
+  labs(title="tabel 1. Hubungan antara Angka Kelahiran dan Jumlah Penduduk Miskin",
+      x="Angka Kelahiran",
+      y="Jumlah Penduduk Miskin",
+      caption = "sumber : Badan Pusat Statistik")+
+   theme_classic()
+```
+
+![](Rplot UAS.png)
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini merbaksud mencari hubungan antara Jumlah Penduduk Miskin (JPM) dan Angka Kelahiran (AK). Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah AK dan $x_t$ adalah JPM.
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Dikarenakan peneliti menggunakan OLS, maka fokus yang akan dibahas hanya mengaitkan Angka Kelahiran dan Jumlah Penduduk Miskin. Data tersebut disatukan sehingga menampilkan regresi seperti ini.
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('dat.xlsx')
+head(dat)
+```
+
+```         
+```
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+reg1<-lm(AK~JPM,data=dat)
+summary(reg1)
+```
+
+```         
+Call:
+lm(formula = AK ~ JPM, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.56848 -0.09665 -0.02598  0.12824  0.50824 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.345e+00  4.786e-02  49.007   <2e-16 ***
+JPM         -5.426e-05  3.420e-05  -1.586    0.122    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2275 on 32 degrees of freedom
+Multiple R-squared:  0.07291,	Adjusted R-squared:  0.04394 
+F-statistic: 2.517 on 1 and 32 DF,  p-value: 0.1225
+```
+
+```{}
+```
+
+## Kesimpulan
+
+Dari regresi yang telah dilakukan, dapat dilihat bahwa setiap meningkat 100 ribu jiwa Jumlah Penduduk Miskin di Indonesia, maka Angka Kelahiran di Indonesia menurun sebesar 5,226 persen. Hal tersebut bisa terjadi karena adanya Pandemi Covid-19 yang mulai menyebar pada tahun 2020 dan adanya Program Keluarga Berencana (KB). Kejadian tersebut membuat masyarakat menunda kelahiran anak karena adanya penurunan ekonomi.
+
+Dari sini dapat disimpulkan bahwa Jumlah Penduduk Miskin dapat memengaruhi Angka Kelahiran di Indonesia pada tahun 2020.
+
+## Referensi
+
+Badan Pusat Statistik. (n.d). Retrieved January 09, 2024, from https://www.bps.go.id/id/statistics-table/2/MTg1IzI=/jumlah-penduduk-miskin--ribu-jiwa--menurut-provinsi-dan-daerah.html.
+
+Badan Pusat Statistik. (n.d). Retrieved January 09, 2024, from https://www.bps.go.id/id/statistics-table/1/MjIxMCMx/angka-kelahiran-total---total-fertility-rate--tfr--menurut-provinsi--1971-2020.html.
+
+Mahendra, A. (2019). Analisis Faktor-Faktor Yang Mempengaruhi Fertilitas Di Indonesia. *Jurnal Riset Akuntansi & Keuangan*, 3(2), 223--242. https://doi.org/10.54367/jrak.v3i2.448.
+
+Murdiyana, M., & Mulyana, M. (2017). Analisis Kebijakan Pengetasan Kemiskinan Di Indonesia. *Jurnal Politik Pemerintahan Dharma Praja*, 10(1), 73--96. https://doi.org/10.33701/jppdp.v10i1.384.
+
+Okuputra, M. A., & Nasikh, N. (2022). Pengaruh inovasi daerah terhadap kemiskinan. *INOVASI*, 18(1), 159--166. https://doi.org/10.30872/jinv.v18i1.10379.
